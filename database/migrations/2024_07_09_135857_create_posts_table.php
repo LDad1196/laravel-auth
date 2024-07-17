@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('description');
             $table->string('collaborators');
             $table->string('framework');
-            $table->text('thumb');
+            $table->string('thumb');
             $table->date('start_project');
             $table->date('end_project');
             $table->foreignId('type_id')->constrained();
