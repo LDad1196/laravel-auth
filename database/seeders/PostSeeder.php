@@ -23,7 +23,7 @@ class PostSeeder extends Seeder
             $post->description = $faker->text;
             $post->collaborators = $faker->name;
             $post->framework = $faker->name;
-            $post->thumb = $url;
+            $post->thumb = $faker->imageUrl(600, 400, 'projects', true, gray: true, format: 'jpg');
             $post->start_project = $faker->date();
             $post->end_project = $faker->date();
             $post->type_id = $faker->numberBetween(1, 4);
