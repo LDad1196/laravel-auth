@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Post;
 use App\Models\Type;
-use App\Models\Language;
-
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
+
 
 class PostController extends Controller
 {
@@ -45,24 +45,21 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        $data = $request->validate([
-            "project_title" => "required|min:3|max:200",
-            "description" => "required|min:3|max:255",
-            "collaborators" => "required|min:3|",
-            "framework" => "required",
-            "thumb" => "required",
-            "start_project" => "required",
-            "end_project" => "required",
-            "type_id" => "required",
-        ]);
+        
+        
+        $data = $request->validated();
 
+        $img_path = Storage::put('uploads', $request->thumb);
+        
+        $data['thumb'] = $img_path;
+        
         $newPost = new Post();
-
+        
         $newPost->fill($data);
-
+        
         $newPost->save();
-
-        return redirect()->route('admin.posts.index', $newPost);
+        
+        return to_route('admin.posts.index');
     }
 
     /**
@@ -96,20 +93,15 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
-        $data = $request->validate([
-            "project_title" => "required|min:3|max:200",
-            "description" => "required|min:3|max:255",
-            "collaborators" => "required|min:3|",
-            "framework" => "required",
-            "thumb" => "required",
-            "start_project" => "required",
-            "end_project" => "required",
-            "type_id" => "required",
-        ]);
+        $data = $request->validated;
+
+        $img_path = Storage::put('uploads', $request->thumb);
+        $data['thumb'] = $img_path;
 
         $post->update($data);
 
-        return redirect()->route('admin.posts.show', $post);
+
+        return to_route('admin.posts.show', $post);
     }
 
     /**

@@ -18,8 +18,6 @@ class Post extends Model
         "start_project",
         "end_project",
         "type_id",
-        "created_at",
-        "updated_at",
     ];
 
     public function type()

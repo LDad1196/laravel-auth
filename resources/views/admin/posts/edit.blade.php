@@ -16,7 +16,7 @@
         </div>
     @endif
 
-    <form action="{{ route('admin.posts.update', $post) }}" method="POST">
+    <form action="{{ route('admin.posts.update', $post) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
 
@@ -28,6 +28,7 @@
                         <label class="form-label py-2 text-danger fw-bold fs-5">TITLE</label>
                         <input type="text" class="form-control" name="project_title" placeholder="Title" required
                             value="{{ $post->project_title }}">
+                            
                     </div>
 
                     <div class="col-5 px-0 pb-4">
@@ -68,9 +69,11 @@
                     </div>
 
                     <div class="col-11 px-0 pb-4">
-                        <label class="py-2 text-danger fw-bold fs-5">IMAGE LINK</label>
-                        <input type="text" class="form-control" name="thumb" placeholder="Link" required
-                            value="{{ $post->thumb }}">
+                        <label for="thumb" class="py-2 text-danger fw-bold fs-5">IMAGE LINK</label>
+                        <input type="file" class="form-control" name="thumb" id="thumb" placeholder="" aria-describedby="ThumbHelper" />
+                        @error('cover_image')
+                        <div class="form-text text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <div class="col-11 px-0 pb-4">

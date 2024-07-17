@@ -8,7 +8,12 @@
             @foreach ($posts as $post)
                 <div class="col-3 card p-4 m-3 border border-2 border-black"
                     style=" background-color:rgba(255, 153, 0, 0.723)">
-                    <img src="{{ $post['thumb'] }}" class="card-img-top" alt="...">
+                    @if (Str::startsWith($post->thumb, 'http'))
+                        <img src="{{ $post->thumb }}" class="card-img-top">
+                    @else
+                        <img src="{{ asset('storage/' . $post->thumb) }}" class="card-img-top" alt="...">
+                    @endif  
+                    
 
                     <div class="card-body">
                         <h5 class="card-title">{{ $post['project_title'] }}</h5>

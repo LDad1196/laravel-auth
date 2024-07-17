@@ -22,7 +22,14 @@ class UpdatePostRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+           "project_title" => "required|min:3|max:200",
+            "description" => "required|min:3|max:255",
+            "collaborators" => "required|min:3|",
+            "framework" => "required",
+            "thumb" => "required",
+            "start_project" => "required",
+            "end_project" => "required",
+            "type_id" => "required|integer",
         ];
     }
 }
