@@ -54,12 +54,10 @@ class PostController extends Controller
         $data['thumb'] = $img_path;
         
         $newPost = new Post();
-        
         $newPost->fill($data);
-        
         $newPost->save();
         
-        return to_route('admin.posts.index');
+        return to_route('admin.posts.index')->with('message', 'Post Created');
     }
 
     /**
@@ -93,7 +91,7 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
-        $data = $request->validated;
+        $data = $request->validated();
 
         $img_path = Storage::put('uploads', $request->thumb);
         $data['thumb'] = $img_path;
