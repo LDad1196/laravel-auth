@@ -11,6 +11,7 @@ class Post extends Model
 
     protected $fillable = [
         "project_title",
+        "slug",
         "description",
         "collaborators",
         "framework",

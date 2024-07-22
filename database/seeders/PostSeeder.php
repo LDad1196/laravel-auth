@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 use Faker\Generator as Faker;
 use App\Models\Post;
 use App\Models\Languages;
+use Illuminate\Support\Str;
 
 
 class PostSeeder extends Seeder
@@ -20,6 +21,7 @@ class PostSeeder extends Seeder
         for ($i = 0; $i < 12; $i++) {
             $post = new Post();
             $post->project_title = $faker->name;
+            $post->slug = Str::slug($post->project_title, ('-'));
             $post->description = $faker->text;
             $post->collaborators = $faker->name;
             $post->framework = $faker->name;

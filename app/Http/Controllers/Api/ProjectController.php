@@ -15,4 +15,28 @@ class ProjectController extends Controller
             'projects' => Post::orderByDesc('id')->paginate()
         ]);
     }
+
+    public function latest() {
+
+        return response()->json([
+            'success' => true,
+            'projects' => Post::with('type')->orderByDesc('id')->take()->get()
+        ]);
+    }
+
+    public function show($slug) {
+        $project=Post::with('type')->where('slug', $slug)->first();
+
+        if ($project) {
+            return response()->json([
+                'success' => true,
+                'project'  => $project
+            ]);
+        }   else {
+            return response()->json([
+                'success' => false,
+                'message' => 'not found'
+            ]);
+        }
+    }
 }
