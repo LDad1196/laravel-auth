@@ -36,6 +36,12 @@
                     </div>
 
                     <div class="col-5 px-0 pb-4">
+                        <label class="py-2 text-danger fw-bold fs-5">SLUG NAME</label>
+                        <input type="text" class="form-control" name="slug" placeholder="Slug"
+                            value="{{ old('slug') }}">
+                    </div>
+
+                    <div class="col-5 px-0 pb-4">
                         <label class="py-2 text-danger fw-bold fs-5">USED FRAMEWORKS</label>
                         <input type="text" class="form-control" name="framework" placeholder="Frameworks"
                             value="{{ old('framework') }}">

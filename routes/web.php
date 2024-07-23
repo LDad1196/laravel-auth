@@ -48,5 +48,10 @@ Route::middleware(['auth'])
         Route::post('/receive', 'App\Http\Controllers\PusherController@receive');
     });
 
+Route::get('/mailable', function () {
+    $lead = ['name' => 'lorenzo', 'email' => 'lorenzo@example,.it', 'message' => 'Lorem ipsum dolor'];
+    $lead= Lead::first();
+    return App\Mail\NewLeadMarkdownMessage($lead);
+});
 
 require __DIR__ . '/auth.php';
